@@ -59,27 +59,22 @@ class AI():
             raise ValueError(f"Heuristic {heuristic} not found")
 
     def u(self, possibleMoves: dict):
-        """
-        Uniformity heuristic: Select moves that produce the most tiles of the same value.
-        """
         uniformity_scores = {}
         for move, (matrix, _) in possibleMoves.items():
-            value_counts = {}
-            for row in matrix:
-                for cell in row:
-                    if cell not in value_counts:
-                        value_counts[cell] = 0
-                    value_counts[cell] += 1
-
-            # Calculate a uniformity score as the sum of squares of counts (favoring equal distributions)
-            uniformity_scores[move] = sum(
-                count ** 2 for count in value_counts.values())
+            for i in range(len(matrix)):
+                for j in range(len(matrix[i])):
+                    value = matrix[i][j]
+                    currentValue = self.game.current_state[i][j]
+                    if value != 0 and value != currentValue:
+                        if move not in uniformity_scores:
+                            uniformity_scores[move] = 0
+                        uniformity_scores[move] += 1
 
         max_uniformity = max(uniformity_scores.values())
 
         # Return moves with the maximum uniformity score
-        bestMoves = [move for move, score in uniformity_scores.items()
-                     if score == max_uniformity]
+        bestMoves = [move for move in uniformity_scores.keys(
+        ) if uniformity_scores[move] == max_uniformity]
         bestStates = {move: possibleMoves[move] for move in bestMoves}
 
         return bestStates
