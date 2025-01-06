@@ -1,0 +1,20 @@
+Papers:
+    https://theresamigler.com/wp-content/uploads/2020/03/2048.pdf
+
+heuristics:
+    The above paper seems to be the only actual paper with 2048 heuristics.
+    THey are as follows:
+        
+        Greedy - picks the state with the most official score. the official score is just a sum of added tiles - for instance, if 8 and 8 are added to a 16 tile, 
+        a 16 would be added to the score.
+        
+        Empty - picks the state with the most empty tiles.
+        
+        Uniform - picks the state that produces the most tiles with the same value.
+        
+        Monotonicity - We consider a game to have high monotonicity if the values are either non-increasing along all rows or non-decreasing along all rows and if 
+        the values are non-increasing along all columns or non-increasing along all columns, with the highest value being in one of the four corners.
+
+        Random - Select randomly between the given inputs.
+
+    In 2048, since 2 states easily can be visually different but with the same strategy, i will use multiple heuristics, and finish with the random heuristic, narrowing down the option as i calculate. 
