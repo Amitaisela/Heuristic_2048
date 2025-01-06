@@ -30,7 +30,7 @@ if __name__ == "__main__":
             # now save in a csv, add headers if it's the first time
             if not os.path.exists('results.csv'):
                 with open('results.csv', 'w') as f:
-                    f.write('heuristic, max, score, message\n')
+                    f.write('heuristic,max,score,message\n')
 
             with open('results.csv', 'a') as f:
                 f.write(f'{h}, {game.max}, {game.official_score}, {message}\n')
