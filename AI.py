@@ -3,7 +3,6 @@ import random
 
 
 class AI():
-
     def __init__(self, game_instance: Game, heuristic: str):
         self.game = game_instance
         self.heuristic = heuristic
@@ -80,10 +79,6 @@ class AI():
         return bestStates
 
     def m(self, possibleMoves: dict):
-        """
-        Monotonicity heuristic: Select moves that maintain or improve the monotonicity of the grid.
-        Monotonicity means values are non-increasing or non-decreasing across rows and columns.
-        """
         def is_monotonic(sequence):
             return all(x >= y for x, y in zip(sequence, sequence[1:])) or all(x <= y for x, y in zip(sequence, sequence[1:]))
 
@@ -115,7 +110,6 @@ class AI():
 
         max_monotonicity = max(monotonicity_scores.values())
 
-        # Return moves with the maximum monotonicity score
         bestMoves = [move for move, score in monotonicity_scores.items(
         ) if score == max_monotonicity]
         bestStates = {move: possibleMoves[move] for move in bestMoves}
@@ -136,7 +130,6 @@ class AI():
 
         maxValue = max(countEmpty.values())
 
-        # return the moves in the dict that have the max value
         bestMoves = [move for move in countEmpty.keys()
                      if countEmpty[move] == maxValue]
 
@@ -151,7 +144,6 @@ class AI():
 
         maxValue = max(sum.values())
 
-        # return the moves in the dict that have the max value
         bestMoves = [move for move in sum.keys()
                      if sum[move] == maxValue]
 

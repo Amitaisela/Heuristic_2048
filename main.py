@@ -2,12 +2,15 @@ import os
 import itertools
 from Game import Game
 from AI import AI
+import numpy as np
+import math
 
 
 if __name__ == "__main__":
-    possible = ['u', 'e', 'g']
+    possible = ['m', 'u', 'e', 'g']
     heuristics = [''.join(p) for p in itertools.permutations(possible)]
-    runs = 1000
+    runs = math.factorial(16) // (math.factorial(4) * math.factorial(16 - 4))
+
     filename = f"data/results_{heuristics[0]}_{runs}.csv"
     for h in heuristics:
         for i in range(runs):
@@ -17,6 +20,7 @@ if __name__ == "__main__":
             while True:
                 message = ai.ChooseBestMove()
                 if message == "Won":
+                    print("won")
                     # winning logic
                     break
                 if message == "Lost":
